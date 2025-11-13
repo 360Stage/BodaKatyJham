@@ -1877,53 +1877,86 @@ p {
 
 .story-quote {
   position: relative;
-  width: 100%;
-  /* ocupa todo el ancho del contenedor */
-  max-width: 1200px;
-  /* opcional: limitar ancho máximo */
-  margin: 0 auto;
-  /* centra el div si tiene max-width */
-  height: 300px;
-  /* altura del div, ajustable */
-  transform: translateX(-50%);
-  /* ensures perfect alignment */
-  background-image: url("img/canva2.png");
-  background-size: cover;
-  background-position: center;
-  /* centra la imagen */
-  background-repeat: no-repeat;
-  box-shadow: inset 0 0 40px 30px rgba(232, 230, 230, 0.5);
-  border-radius: 10px;
-  /* opcional, bordes redondeados */
-  overflow: hidden;
-
-  left: -10px; /* mueve horizontalmente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 10px;
+  z-index: 2;
+  /* puedes moverlo hacia arriba si quieres */
+  transform: translateY(-40px);
+  overflow: visible; /* importante para que el ::before funcione */
 }
+
+.story-quote::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250%;
+  height: 150%;
+  background-image: url('img/liston1.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 0;
+  pointer-events: none;
+
+  /* animaciones */
+  animation: moveRibbon 10s linear infinite, shineRibbon 3s ease-in-out infinite alternate;
+}
+
+/* Movimiento horizontal lento */
+@keyframes moveRibbon {
+  0%   { transform: translate(-52%, -55%); } /* horizontal -52%, vertical fijo -55% */
+  50%  { transform: translate(-48%, -55%); } /* solo horizontal cambia */
+  100% { transform: translate(-52%, -55%); }
+}
+
+/* Brillo sutil */
+@keyframes shineRibbon {
+  0%   { filter: brightness(1); }
+  50%  { filter: brightness(1.1); }
+  100% { filter: brightness(1); }
+}
+
+.story-quote-wrapper {
+  width: 100vw;
+  position: relative;
+  overflow-x: hidden; /* evita scroll horizontal de la cinta */
+}
+
+.story-quote-container {
+  position: relative;
+  overflow: hidden; /* corta la parte de la cinta que sobresale verticalmente */
+}
+
+
 
 /* Texto centrado */
 .story-quote .text3 {
-  position: absolute;
-  top: 54%;
-  left: 55%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  font-size: clamp(1.5rem, 3vw, 1.8rem);
-  /* escala automáticamente según ancho */
-  font-weight: bold;
-  color: #d6d6d6;
-  font-family: 'Arial', sans-serif;
+  top: 17px;
+  position: relative;
   z-index: 2;
-  padding: 10px 8px;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  font-size: clamp(1.6rem, 3vw, 3rem);
+  font-weight: bold;
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  text-align: center;
+  padding: 10px 20px;
   max-width: 90%;
-  /* evita que el texto se desborde lateralmente */
   line-height: 1.4;
-
-  /* Efecto resplandor */
   text-shadow:
     0 0 8px rgba(255, 255, 255, 0.8),
     0 0 16px rgba(255, 255, 255, 0.6),
-    0 0 24px rgba(255, 255, 255, 0.4);
+    0 0 24px rgba(255, 255, 255, 0.4),
+    0 0 12px rgba(0, 0, 0, 0.9);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;  /* ya lo tenías para horizontal */
 }
 
 .registry-img-sm {
