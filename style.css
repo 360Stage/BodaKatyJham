@@ -63,22 +63,33 @@ h3 {
   line-height: 1.3rem;
 }
 
+a {
+  display: flex;
+  justify-content: center;
+}
+
 .huge-btn {
-  display: block;
-  font-size: 1.4rem;
-  background: #c7ab4f;
+  display: inline-block;
+  font-size: clamp(1.1rem, 4vw, 1.6rem);
+  background: linear-gradient(135deg, #ff4d4d, #e63946, #c1121f); /* tonos rojizos */
   color: white;
-  border: 1px solid #d4af37;
-  padding: 25px 50px;
+  padding: 22px 55px;
+  border: none;
   border-radius: 50px;
-  width: fit-content;
-  margin: 30px auto;
+
   text-align: center;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  /* evita que el reflejo se salga */
-  transition: all 0.3s ease;
+
+  font-weight: 600;
+  letter-spacing: 1px;
+
+  box-shadow: 0 0 38px rgba(255, 77, 77, 0.7); /* glow rojo */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  /* Latido */
+  animation: pulse 2s infinite;
 }
 
 /* Reflejo animado */
@@ -86,46 +97,49 @@ h3 {
   content: "";
   position: absolute;
   top: 0;
-  left: -75px;
-  width: 50px;
+  left: -120%;
+  width: 80%;
   height: 100%;
   background: linear-gradient(120deg,
-      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0) 0%,
       rgba(255, 255, 255, 0.6) 50%,
-      rgba(255, 255, 255, 0.1) 100%);
-  transform: skewX(-25deg);
-  animation: shine 4s ease-in-out infinite;
-  /* brillo automático */
-  animation-delay: 2s;
-  /* comienza después de un pequeño intervalo */
+      rgba(255, 255, 255, 0) 100%);
+  transform: skewX(-20deg);
+  animation: shine 3.5s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0% { left: -120%; }
+  60% { left: 150%; }
+  100% { left: 150%; }
+}
+
+/* Latido */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 18px rgba(255, 77, 77, 0.7); }
+  50% { transform: scale(1.08); box-shadow: 0 0 28px rgb(255, 98, 98); }
 }
 
 .huge-btn:hover {
-  color: grey;
-  border-color: grey;
-  transform: scale(1.05);
+  box-shadow: 0 0 35px rgba(255, 77, 77, 1.2); /* glow máximo al hover */
 }
 
-/* Animación del reflejo */
-@keyframes shine {
-  0% {
-    left: -75px;
-    opacity: 0;
-  }
+.hand-indicator {
+    display: flex;
+    justify-content: center;
+    margin-top: -15px; /* separación del botón */
+    animation: moveUpDown 1.5s ease-in-out infinite; /* movimiento vertical */
+}
 
-  10% {
-    opacity: 1;
-  }
+.hand-indicator img {
+    width: 50px; /* tamaño responsive, ajustable */
+    height: auto;
+}
 
-  40% {
-    left: 120%;
-    opacity: 0;
-  }
-
-  100% {
-    left: 120%;
-    opacity: 0;
-  }
+/* Animación de movimiento vertical */
+@keyframes moveUpDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); } /* sube 10px en el centro */
 }
 
 .v-reposition-container {
@@ -1559,7 +1573,7 @@ p {
   width: clamp(200px, 30vw, 400px);
   /* tamaño responsive */
   height: auto;
-  margin-top: 0rem;
+  margin-top: 5rem;
   /* margen base */
   position: relative;
   /* permite mover verticalmente sin afectar otros elementos */
@@ -2092,14 +2106,27 @@ body {
 /* <===================FOOTER===================> */
 
 footer {
-  margin-top: 10vh;
-  height: fit-content;
+  margin-top: 2vh;
   width: 100%;
-  background-color: var(--grey-color);
   padding: 5vh 15px;
+  background-color: var(--grey-color);
+  text-align: center; /* centra todo */
+  height: fit-content;
 }
 
 footer h2 {
-  font-size: 2Srem;
+  font-family: 'Great Vibes', cursive; /* fuente elegante */
+  font-size: clamp(2rem, 6vw, 4rem); /* responsive */
   font-weight: normal;
+  margin: 0 0 10px 0;
+  letter-spacing: 1px;
+  color: #e63946; /* tono rojizo elegante */
+  text-shadow: 0 0 10px rgba(230, 57, 70, 0.3); /* sutil glow */
+}
+
+footer p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(1rem, 3vw, 1.5rem); /* responsive */
+  margin: 0;
+  color: #d81313cc; /* color blanco suave */
 }
